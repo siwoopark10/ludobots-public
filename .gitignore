@@ -1,0 +1,5 @@
+__pycache__/
+*.urdf
+*.sdf
+*.txt
+.DS_Store

@@ -14,5 +14,7 @@ more "bounce" to go up the stairs.
 
 The head, ears, and tail have no mass so that they don't affect the balance of the robot.
 
+The stairs have a mass of 1000 so that the robot cannot move it with its force.
+
 8 different robots evolve over 8 generations, and the best performing robot becomes the final robot.
 

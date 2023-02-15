@@ -12,4 +12,6 @@ Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake)
 
  - random sensor placement along the chain.
  
- - Links with and without sensors should be colored green and blue, respectively.
+ - Links with and without sensors are colored green and blue, respectively.
+ 
+ The links extend in the y-direction.

@@ -1,10 +1,15 @@
-# Ludobots 
+# Ludobots - Snake
 How to reproduce my results
 ```
 python3 search.py
 ```
 
-The robot is designed to look like a puppy climbing up the stairs. 
+Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a:
 
-The robot is trained to climb up as many stairs as possible. The fitness function returns the final y position of the robot, 
-so the final version of the robot would have traveled the farthest in the y-direction.
+ - random number (between 4 and 10) of
+
+ - randomly shaped links (cube dimensions range from 0 to 1) with
+
+ - random sensor placement along the chain.
+ 
+ - Links with and without sensors should be colored green and blue, respectively.

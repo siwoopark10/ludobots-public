@@ -10,6 +10,6 @@ from solution import SOLUTION
 # phc.Evolve()
 # phc.Show_Best()
 
-for i in range(1):
+for i in range(5):
     solution = SOLUTION()
     solution.Start_Simulation()

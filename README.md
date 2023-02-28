@@ -17,7 +17,7 @@ Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake)
  - Links with and without sensors are colored green and blue, respectively.
  
  ## Structure
- The vertabrae extend in the y-direction, and each vertabrae link has a random dimension [(0,1), (0,1), (0,0.3)]. The height was intentially set to a lower value to provide more balance to the creature. The number of links in the vertabrae is randomly chosen between 3 and 8. 
+ The torso extend in the y-direction, and each torso link has a random dimension [(0,1), (0,1), (0,0.3)]. The height was intentially set to a lower value to provide more balance to the creature. The number of links in the torso is randomly chosen between 3 and 8. 
  
 <img src="https://user-images.githubusercontent.com/57846202/221871750-2e387886-0d08-4ac6-8da5-c2dcba6fb66e.jpg" width="120" height="120">
 
@@ -36,7 +36,8 @@ The next joint which is relative to the previous joint is located at the center 
 The left size is basically the same as the right size but the x-values are filpped.
 
 The main body of the robot is built through **Create_Body** and the neurons are set in **Create_Brain**.
-I created an helper function **Create_Limbs** to help me loop through to create the arms and legs. 
+I created an helper function **Create_Limbs** to help me loop through to create the arms and legs.
+
 One shoftcut I took was to keep the size of the arms and legs smaller than the main vertebrae link so that there aren't any unpleasing overlaps between the limbs. The joint axes were also determined carefully to allow forward and backward movement for the robot creature.
 
 Before each simulation is run, I intitialize the necessary weights, such as synapse weights, random size of links, and the positioning of sensor neurons.
@@ -51,7 +52,7 @@ The creature evolves through mutations which can be divided into 4 main types:
 In each evolution, any of these 4 mutations could happen. 
 
 ### Parallel Hill Climber
-Parallel Hill Climber allows us to simulatenously train and evolve different robots so that I can start off on various starting points. Each robot in the population evolves over several generations. The population size and the number of generations can be modified in the `constants.py` file. The main loop of this method is to create a child robot from a copy of a parent robot, and to generate mutations in the child robot to see if it outperforms the parent with the modifications. If the child robot performs better, we overwrite the parent robot with the child and continue to evolve and mutate until we reach the maximum number of generations.
+Parallel Hill Climber allows us to simulatenously train and evolve different robots so that I can start off on various starting points. Each robot in the population evolves over several generations. The population size and the number of generations can be modified in the `constants.py` file. The main functionality of this method is to create a child robot from a copy of a parent robot, and to generate mutations in the child robot to see if it outperforms the parent. If the child robot performs better, we overwrite the parent robot with the child and continue to evolve and mutate until we reach the maximum number of generations.
 
 ### Fitness function
-The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time simulation terminates.
+The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.

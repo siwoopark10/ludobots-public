@@ -53,6 +53,7 @@ class ROBOT:
         # xCoordinateOfLinkZero = positionOfLinkZero[0]
         xCoordinateOfLinkZero = basePosition[1]
         f = open(f"tmp{self.id}.txt", "w")
+        print('opened')
         f.write(str(xCoordinateOfLinkZero))
         f.close()
         os.system(f"mv tmp{self.id}.txt fitness{self.id}.txt")

@@ -1,20 +1,16 @@
 pybullet build time: Jan  9 2023 10:35:06
-Version = 4.1 Metal - 83
-Vendor = Apple
-Renderer = Apple M2
-b3Printf: Selected demo: Physics Server
-startThreads creating 1 threads.
-starting thread 0
-started thread 0 
-MotionThreadFunc thread started
-b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
-
-b3Printf: expected a world element, continuing without it.
-numActiveThreads = 0
-stopping threads
-Thread with taskId 0 exiting
-Thread TERMINATED
-destroy semaphore
-semaphore destroyed
-destroy main semaphore
-main semaphore destroyed
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+expected a world element, continuing without it.Traceback (most recent call last):
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/simulate.py", line 8, in <module>
+    simulation.Run()
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/simulation.py", line 33, in Run
+    self.robot.Think()
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/robot.py", line 44, in Think
+    self.nn.Update()
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/pyrosim/neuralNetwork.py", line 35, in Update
+    self.neurons[neuronName].Update_Sensor_Neuron()
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/pyrosim/neuron.py", line 71, in Update_Sensor_Neuron
+    self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(
+  File "/Users/siwoopark/Documents/Artificial Life/ludobots-public/pyrosim/pyrosim.py", line 52, in Get_Touch_Sensor_Value_For_Link
+    desiredLinkIndex = linkNamesToIndices[linkName]
+KeyError: 'Arm0'

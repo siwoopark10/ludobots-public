@@ -1,8 +1,10 @@
-# Ludobots - Snake
+# Ludobots
 How to reproduce my results
 ```
 python3 search.py
 ```
+
+The creature has a spine like the one used in assignment 6, but now it has arms and leg that 
 
 Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a:
 
@@ -14,4 +16,6 @@ Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake)
  
  - Links with and without sensors are colored green and blue, respectively.
  
- The links extend in the y-direction.
+ The vertabrae extend in the y-direction, and the arms and legs expand in the x and z direction.
+
+

@@ -5,11 +5,10 @@ import pyrosim.pyrosim as pyrosim
 import pybullet_data
 import time
 import constants as c
-from snake import SNAKE
 
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
         if directOrGUI == "GUI":
             self.p = p.connect(p.GUI)
@@ -19,7 +18,7 @@ class SIMULATION:
         p.setGravity(0, 0, c.GRAVITY)
 
         self.world = WORLD()
-        self.robot = SNAKE()
+        self.robot = ROBOT(solutionID)
 
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
 

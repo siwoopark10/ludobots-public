@@ -18,11 +18,9 @@ Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake)
  
  The vertabrae extend in the y-direction, and the arms and legs expand in the x and z direction.
  
- 
-
-![IMG_3284](https://user-images.githubusercontent.com/57846202/221870624-2e24ca4b-741f-4f4c-a1e6-7434ecb47ace.jpg)
-![IMG_3285](https://user-images.githubusercontent.com/57846202/221870639-8fe58ee5-825b-4860-b8b9-4b5f1cef2fe1.jpg)
-![IMG_3286](https://user-images.githubusercontent.com/57846202/221870646-5197a7a3-d47b-4a38-a31c-ef8cd9ddf479.jpg)
-![IMG_3287](https://user-images.githubusercontent.com/57846202/221870650-38fd8a65-4f2f-4f21-921e-9526fa12406a.jpg)
-![IMG_3288](https://user-images.githubusercontent.com/57846202/221870656-845f20b2-8a31-4f49-b93b-7c1dba0b3cfe.jpg)
+ ![IMG_3284](https://user-images.githubusercontent.com/57846202/221871750-2e387886-0d08-4ac6-8da5-c2dcba6fb66e.jpg)
+![IMG_3285](https://user-images.githubusercontent.com/57846202/221871752-9a090dc3-1ef1-4df4-b7b0-961435029ed9.jpg)
+![IMG_3286](https://user-images.githubusercontent.com/57846202/221871753-2f06334f-32a0-480f-af71-15362c753944.jpg)
+![IMG_3287](https://user-images.githubusercontent.com/57846202/221871755-d47436d7-7b62-4e6f-bf5a-f7296d4a053a.jpg)
+![IMG_3288](https://user-images.githubusercontent.com/57846202/221871758-0727fe8d-80be-41f7-88a7-c8df092b6223.jpg)
 

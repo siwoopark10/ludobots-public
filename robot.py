@@ -9,10 +9,11 @@ import constants as c
 
 class ROBOT:
     def __init__(self, id):
-        self.robotId = p.loadURDF("body.urdf")
+        self.robotId = p.loadURDF(f"body{id}.urdf")
         self.id = id
         self.nn = NEURAL_NETWORK(f"brain{id}.nndf")
         os.system(f"rm brain{id}.nndf")
+        os.system(f"rm body{id}.urdf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -53,7 +54,6 @@ class ROBOT:
         # xCoordinateOfLinkZero = positionOfLinkZero[0]
         xCoordinateOfLinkZero = basePosition[1]
         f = open(f"tmp{self.id}.txt", "w")
-        print('opened')
         f.write(str(xCoordinateOfLinkZero))
         f.close()
         os.system(f"mv tmp{self.id}.txt fitness{self.id}.txt")

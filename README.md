@@ -107,5 +107,6 @@ The robot in this assignment is trying to optimize for how far it can crawl in t
 
 ### Fitness Curves
 The fitness improvement for population size = 5 and number of generations = 25 with 5 random seeds.
-<img src="https://user-images.githubusercontent.com/57846202/222009906-44811364-cbbf-44a0-8992-bbeb3d189397.png" width="160" height="120">
+
+<img src="https://user-images.githubusercontent.com/57846202/222009906-44811364-cbbf-44a0-8992-bbeb3d189397.png" width="250" height="200">
 

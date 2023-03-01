@@ -1,20 +1,12 @@
 # Ludobots
-How to reproduce my results
+### Credits
+My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/)
+
+## How to reproduce my results
 ```
 python3 search.py
 ```
-
-The creature has a spine like the one used in assignment 6, but now it has arms and leg that 
-
-Generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a:
-
- - random number (between 4 and 10) of
-
- - randomly shaped links (cube dimensions range from 0 to 1) with
-
- - random sensor placement along the chain.
- 
- - Links with and without sensors are colored green and blue, respectively.
+This python script creates a parallel hill climber that evolves a robot that moves forward the fastest. After a series of evolutions, it should display a simulation of the robot with the best performance.
  
  ## Structure
  The torso extend in the y-direction, and each torso link has a random dimension [(0,1), (0,1), (0,0.3)]. The height was intentially set to a lower value to provide more balance to the creature. The number of links in the torso is randomly chosen between 3 and 8. For simiplicity sake, the sizes of every link will be [1,1,1] even though I limited the z-size of the torso to be 0.3 and that of the limbs to be 0.5.
@@ -106,7 +98,7 @@ Parallel Hill Climber allows us to simulatenously train and evolve different rob
 The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
 
 ### Fitness Curves
-The fitness improvement for population size = 5 and number of generations = 25 with 5 random seeds.
+The fitness improvement for population size = 5 and number of generations = 25 with 5 random seeds. A larger set of values could produce a smoother curve.
 
-<img src="https://user-images.githubusercontent.com/57846202/222009906-44811364-cbbf-44a0-8992-bbeb3d189397.png" width="250" height="200">
+<img src="https://user-images.githubusercontent.com/57846202/222009906-44811364-cbbf-44a0-8992-bbeb3d189397.png" width="350" height="300">
 

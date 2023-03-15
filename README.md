@@ -1,4 +1,9 @@
 # Ludobots
+## Teaser:
+
+
+## Video: https://youtu.be/JifEDfGnvVI
+
 ### Credits
 My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/).  
 Final Project for CS 396/496 Aritificial Life.
@@ -50,7 +55,7 @@ Each body segment looks like either one of these three 3D models:
 
 - no limbs, two arms, two legs
 
-<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100"><img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="120"><img src="https://user-images.githubusercontent.com/57846202/222006614-9c600284-d660-4c38-a0f8-e3282f237cf5.jpg" height="100" width="120">
+<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100"><img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="150"><img src="https://user-images.githubusercontent.com/57846202/222006614-9c600284-d660-4c38-a0f8-e3282f237cf5.jpg" height="100" width="120">
 
 ### Links and Joints Positioning
 
@@ -96,21 +101,21 @@ The creature evolves through mutations which can be divided into 4 main types (2
 
 - Changing synapse weight
 
-<img src="https://user-images.githubusercontent.com/57846202/222008211-3cdeb1a3-836c-468a-8366-2a226a23ba44.jpg" width="200" height="160">
+<img src="https://user-images.githubusercontent.com/57846202/222008211-3cdeb1a3-836c-468a-8366-2a226a23ba44.jpg" width="260" height="180">
 
 Since we know the dimentions of `self.weights`, we can replace one of the values to a random value between -1 and 1.
 
 - Generating or deleting links (either torso or limbs)
 
-<img src="https://user-images.githubusercontent.com/57846202/222008184-7e966f82-7fcd-4549-94b5-dbdc06f36d9e.jpg" width="200" height="160">
+<img src="https://user-images.githubusercontent.com/57846202/222008184-7e966f82-7fcd-4549-94b5-dbdc06f36d9e.jpg" width="300" height="160">
 
 - Changing the size of the links (either torso or limbs)
 
-<img src="https://user-images.githubusercontent.com/57846202/222009293-b4aa71e0-83f1-4b6d-bec4-6acf0a0c9f8b.jpg" width="200" height="160">
+<img src="https://user-images.githubusercontent.com/57846202/222009293-b4aa71e0-83f1-4b6d-bec4-6acf0a0c9f8b.jpg" width="300" height="160">
 
 - Changing sensor placement (either torso and limbs)
 
-<img src="https://user-images.githubusercontent.com/57846202/222009114-b903d26b-88e6-4865-a3ac-25a8d1db6f64.jpg" width="200" height="150">
+<img src="https://user-images.githubusercontent.com/57846202/222009114-b903d26b-88e6-4865-a3ac-25a8d1db6f64.jpg" width="220" height="180">
 
 In each evolution, one of these 7 mutations happen. 
 

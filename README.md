@@ -3,8 +3,7 @@
 My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/).  
 Final Project for CS 396/496 Aritificial Life.
 
-## How to reproduce my results
-You can run 50,000 simulations by calling the python script below. 
+### How to reproduce my work
 ```
 python3 search.py
 ```
@@ -137,11 +136,4 @@ The results of the simulations are all stored in the `results` directory.
 
 The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
 
-/Users/siwoopark/Documents/Artificial Life/ludobots-public/results/phc_fitness_curve.png
-### Fitness Curves
-The fitness improvement for population size = 5 and number of generations = 25 with 5 random seeds. A larger set of values could produce a smoother curve.
 
-<img src="https://user-images.githubusercontent.com/57846202/222009906-44811364-cbbf-44a0-8992-bbeb3d189397.png" width="350" height="300">
-
-### Video Demonstrating Evolution
-https://youtu.be/8KHb1xFTw8U

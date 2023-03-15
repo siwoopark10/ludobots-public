@@ -138,7 +138,9 @@ I kept track of all the mutations that led to an improved fitness for each PHC. 
 
 Synapse weight and link size mutations were always the top two leading mutations, and the other mutations had similar counts when considering the other mutation graphs in different seeds. 
 
-Since the synapse weights control the movement of the joints, they play the biggest role in determining the robot's overall mobility. In the fitness curves
+Since the synapse weights control the movement of the joints, they play the biggest role in determining the robot's overall mobility. In the fitness curves, we can see a lot of small improvements in fitness over generations. These micro improvements in fitness for each population of robots can be credited to optimizing the synapse weight, which steered the robot in the right direction with the right magnitude.
+
+Link size probably affects the stability of the robot. Sometimes the weight distribution is unequal along the body of the robot, and changing the size of these oversized links can greatly improve the movement and help propel the robot forward.
 
 
 Let's look deeper into the population with the highest fitness. 

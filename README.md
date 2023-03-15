@@ -135,10 +135,16 @@ Parallel Hill Climber allows us to simulatenously train and evolve different rob
 
 ## Results
 
-The results of the simulations are all stored in the `results` directory. 
+The results of the simulations are all stored in the `results` directory. To summarize the outputs:
+- PHC Fitness Curve displaying the best fitness at each generation for 10 parallel hill climbers
+- Fitness curve for each population over 500 generations for each random seed
+- Successful mutations count for each random seed
+- Pickled solutions for generation 0, 100, 200, and 499 for each population in a random seed (scroll to the top to view this pickled solutions)
+
 This is a fitness curve for the best fitness among all the populations for each PHC across 500 generations.
 ![PHC Fitness Curves](https://github.com/siwoopark10/ludobots-public/blob/main/results/phc_fitness_curve.png)
 
+### Mutation Effectiveness  
 I kept track of all the mutations that led to an improved fitness for each PHC. The graphs looked similar across all random seeds.
 ![Mutation](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_6/mutation_count.png)
 
@@ -148,11 +154,14 @@ Since the synapse weights control the movement of the joints, they play the bigg
 
 Link size probably affects the stability of the robot. Sometimes the weight distribution is unequal along the body of the robot, and changing the size of these oversized links can greatly improve the movement and help propel the robot forward.
 
+These can be developed into a hypothesis and tested in the future
 
+### Examples of the evolution of a few lineages  
 Let's look deeper into the population with the highest fitness. 
 ![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_8.png)
 
-**Seed 8 Population 8**
+
+#### Seed 8 Population 8  
 We can see that Population 1 of seed 8 had an impressive fitness of over 7.  
 Generation 1  
 ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/57846202/225186015-6d79af7c-0270-4c8e-bf2f-8de6c884db56.gif)
@@ -165,7 +174,8 @@ Generation 499
 Another link with sensor was added at the front, which pulled the robot forward with great force.  
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/57846202/225185780-1000afc3-3e13-48ac-a714-41e4d59c72bd.gif)
 
-**Seed 6 Population 6**
+
+#### Seed 6 Population 6  
 This robot struggled mainly because of its lack of sensors and ineffective limbs.  
 Generation 0  
 ![ezgif com-video-to-gif (4)](https://user-images.githubusercontent.com/57846202/225210657-dec0e597-9430-4ceb-aee7-f62260bc0936.gif)
@@ -178,9 +188,21 @@ Generation 499
 The robot still moves forward, but it spins and takes a very ineffective route. This was one of the worst performances if not the worst after 499 generations. The lack of improvement in the robot could probably because of unlucky mutations and the lack of limbs and sensors to work with.  
 ![ezgif com-video-to-gif (6)](https://user-images.githubusercontent.com/57846202/225210677-c9a0354e-0c0d-4106-ac95-f3e89095a742.gif)
 
+#### Seed 5 Population 8  
+This one was interesting because each generation had unique mutations.  
+Generation 0  
+![ezgif com-video-to-gif (7)](https://user-images.githubusercontent.com/57846202/225219476-19a64532-c323-4f49-af92-01c7f0a6f06a.gif)
 
+Generation 100  
+Reduced number of limbs and links, but movement is still not ideal.  
+![ezgif com-video-to-gif (8)](https://user-images.githubusercontent.com/57846202/225219482-a380548d-699e-43fc-82d8-540521ad3de3.gif)
 
+Generation 200  
+The size of the limbs reduced which allowed for more controlled movement
+![ezgif com-video-to-gif (9)](https://user-images.githubusercontent.com/57846202/225219488-82bb847a-6964-41a7-8e61-6df53d61f37a.gif)
 
-
+Generation 499  
+The number of links and limbs stayed the same, but the size of each of them changed. They are a lot flatter and the whole robot looks a lot lighter.  
+![ezgif com-video-to-gif (10)](https://user-images.githubusercontent.com/57846202/225219493-9f39177b-cdee-4904-9b21-d429f5d30c86.gif)
 
 

@@ -9,6 +9,7 @@ My work projects for the evolutionary robotics project - Ludobots, based complet
 Final Project for CS 396/496 Aritificial Life.
 
 ### How to reproduce my work
+#### 1. Run parallel hill climber
 ```
 python3 search.py
 ```
@@ -16,13 +17,16 @@ This python script creates a parallel hill climber that evolves a robot that mov
 
 Currently, this script creates 10 parallel hill climbers with 10 random seeds. Each parallel hill climber has a population size of 10 and simulates each population over 500 generations. Thus, 500 * 10 * 10 = 50,000 simulations.  
 You can change the *number of hill climbers* being created in `search.py`.  
-You can edit the *population size* and *number of generations* in `constants.py`.  
+You can edit the *population size* and *number of generations* in `constants.py`. 
 
-You can also choose to view the evolution process of any lineage.
+**Note: I recommend using a population size<=3 and number of generations<=20 to test the code.**
+
+
+#### 2. View the evolution process of any lineage
 ```
 python3 showLineage.py {seed_number} {population_number}
 ```
-This will display 4 simulations corresponding to 4 different generations for that specific lineage. Feel free to look at the fitness_curve_per_population graph to choose which population to run.
+This will display 4 simulations corresponding to 4 different generations (0,100,200,499) for that specific lineage. Feel free to look at the fitness_curve_per_population graph in `results/seed_{num}` to choose which population to run.
 
 ## The World
 <img src="https://user-images.githubusercontent.com/57846202/225165716-6da3286e-5193-43b4-b67a-e6408ffa9182.jpg" width="350" height="280">  

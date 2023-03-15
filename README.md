@@ -48,17 +48,9 @@ A phenotype of a body segment would look like this 3D model:
 
 Each body segment looks like either one of these three 3D models:
 
-- no limbs
+- no limbs, two arms, two legs
 
-<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100">  
-
-- two arms  
-
-<img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="120">  
-
-- or two arms and legs  
-
-<img src="https://user-images.githubusercontent.com/57846202/222006614-9c600284-d660-4c38-a0f8-e3282f237cf5.jpg" height="100" width="120">
+<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100"><img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="120"><img src="https://user-images.githubusercontent.com/57846202/222006614-9c600284-d660-4c38-a0f8-e3282f237cf5.jpg" height="100" width="120">
 
 ### Links and Joints Positioning
 
@@ -133,7 +125,26 @@ Parallel Hill Climber allows us to simulatenously train and evolve different rob
 ## Results
 
 The results of the simulations are all stored in the `results` directory. 
+This is a fitness curve for the best fitness among all the populations for each PHC across 500 generations.
+![PHC Fitness Curves](https://github.com/siwoopark10/ludobots-public/blob/main/results/phc_fitness_curve.png)
 
-The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
+I kept track of all the mutations that led to an improved fitness for each PHC. The graphs looked similar across all random seeds.
+![Mutation](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_6/mutation_count.png)
+![Mutation](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/mutation_count.png)
+
+Synapse weight and link size mutations were always the top two leading mutations, and the other mutations had similar counts when considering the other mutation graphs in different seeds.
+
+Let's look deeper into the population with the highest fitness. 
+![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_13.png)
+
+We can see that Population 1 of seed 8 had an impressive fitness of over 7.
+
+![caption](https://user-images.githubusercontent.com/57846202/225185393-ed518889-47ac-4f45-86ec-c3411c57e65f.mov / GIF)
+
+
+
+
+
+
 
 

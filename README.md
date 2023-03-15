@@ -101,23 +101,7 @@ All of the code for a single run of simulation is done in `solutions.py`. The wo
 
 
 ## Evolution
-The creature evolves through mutations which can be divided into 4 main types (2 body and 2 brain): Generating or deleting limbs, changing the size of the links, changing synapse weight, and changing sensor placement.
-
-- Generating or deleting limbs
-
-<img src="https://user-images.githubusercontent.com/57846202/222008184-7e966f82-7fcd-4549-94b5-dbdc06f36d9e.jpg" width="200" height="160">
-
-Each torso link has up to 4 limbs corresponding to it. We have already determined the sizes of each link with `self.linkRandomSizes` and `self.linkLimbsRandomSizes`. These are all indexed by `self.randomLinkNum`, so we can choose a random torso link to access the limbs. The number of limbs is determined by the length of the list inside each index. 
-
-We can replace the list inside a random index of `self.linkLimbsRandomSizes` by repeating the process we went through to create limbs. Randomly selecting a number between 0 and 3 and creating arms and legs according to that number with random sizes. 
-
-Once we generate new limbs, we also need to edit `self.weights` and `self.linkLimbsWithSensors` so we can rerun `self.Initialize_Weights()`.
-
-- Changing the size of the links
-
-<img src="https://user-images.githubusercontent.com/57846202/222009293-b4aa71e0-83f1-4b6d-bec4-6acf0a0c9f8b.jpg" width="200" height="160">
-
-With `self.linkLimbsRandomSizes` and `self.linksRandomSizes` which are used in `Create_Body()`, we can easily modify the sizes of any links. We can randomly create a new size for a link and replace the values inside these two lists.
+The creature evolves through mutations which can be divided into 4 main types (2 body and 2 brain): Generating or deleting limbs, changing the size of the links, changing synapse weight, and changing sensor placement
 
 - Changing synapse weight
 
@@ -125,11 +109,17 @@ With `self.linkLimbsRandomSizes` and `self.linksRandomSizes` which are used in `
 
 Since we know the dimentions of `self.weights`, we can replace one of the values to a random value between -1 and 1.
 
-- Changing sensor placement
+- Generating or deleting links (either torso or limbs)
+
+<img src="https://user-images.githubusercontent.com/57846202/222008184-7e966f82-7fcd-4549-94b5-dbdc06f36d9e.jpg" width="200" height="160">
+
+- Changing the size of the links (either torso or limbs)
+
+<img src="https://user-images.githubusercontent.com/57846202/222009293-b4aa71e0-83f1-4b6d-bec4-6acf0a0c9f8b.jpg" width="200" height="160">
+
+- Changing sensor placement (either torso and limbs)
 
 <img src="https://user-images.githubusercontent.com/57846202/222009114-b903d26b-88e6-4865-a3ac-25a8d1db6f64.jpg" width="200" height="150">
-
-We have a list of boolean values, `self.linkLimbsWithSensors` and `self.linksWithSensors` indicating which links are sensors and which are not. Pick a random value inside these lists and randomly pick True or False with a probability of 70 percent for True to promote mobility. 
 
 In each evolution, one of these 7 mutations happen. 
 

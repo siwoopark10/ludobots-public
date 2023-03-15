@@ -8,10 +8,8 @@ AMPLITUDE_2 = np.pi/4
 FREQUENCY_2 = (np.pi*2)/50
 PHASE_OFFSET_2 = np.pi/4
 
-numberOfGenerations = 8
-populationSize = 8
+numberOfGenerations = 500
+populationSize = 10
 
-numSensorNeurons = 5
-numMotorNeurons = 4
 
-motorJointRange = 0.8
+motorJointRange = 0.7

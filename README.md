@@ -1,8 +1,8 @@
 # Ludobots
-## Teaser:
+### Teaser:  
+![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/57846202/225207915-d0d6b43d-b586-4355-8c54-fd7effd0856c.gif)
 
-
-## Video: https://youtu.be/JifEDfGnvVI
+### Video: https://youtu.be/JifEDfGnvVI
 
 ### Credits
 My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/).  
@@ -117,7 +117,7 @@ Since we know the dimentions of `self.weights`, we can replace one of the values
 
 <img src="https://user-images.githubusercontent.com/57846202/222009114-b903d26b-88e6-4865-a3ac-25a8d1db6f64.jpg" width="220" height="180">
 
-In each evolution, one of these 7 mutations happen. 
+In each evolution, one of these 4 mutations happen. 
 
 ### Fitness function
 The robot in this assignment is trying to optimize for how far it can crawl in the *positive y-direction*. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
@@ -135,9 +135,11 @@ This is a fitness curve for the best fitness among all the populations for each 
 
 I kept track of all the mutations that led to an improved fitness for each PHC. The graphs looked similar across all random seeds.
 ![Mutation](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_6/mutation_count.png)
-![Mutation](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/mutation_count.png)
 
-Synapse weight and link size mutations were always the top two leading mutations, and the other mutations had similar counts when considering the other mutation graphs in different seeds.
+Synapse weight and link size mutations were always the top two leading mutations, and the other mutations had similar counts when considering the other mutation graphs in different seeds. 
+
+Since the synapse weights control the movement of the joints, they play the biggest role in determining the robot's overall mobility. In the fitness curves
+
 
 Let's look deeper into the population with the highest fitness. 
 ![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_8.png)

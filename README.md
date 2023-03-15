@@ -135,11 +135,17 @@ I kept track of all the mutations that led to an improved fitness for each PHC. 
 Synapse weight and link size mutations were always the top two leading mutations, and the other mutations had similar counts when considering the other mutation graphs in different seeds.
 
 Let's look deeper into the population with the highest fitness. 
-![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_13.png)
+![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_8.png)
 
 We can see that Population 1 of seed 8 had an impressive fitness of over 7.
+Generation 1  
+![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/57846202/225186015-6d79af7c-0270-4c8e-bf2f-8de6c884db56.gif)
 
-![caption](https://user-images.githubusercontent.com/57846202/225185393-ed518889-47ac-4f45-86ec-c3411c57e65f.mov / GIF)
+Generation 100  
+![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/57846202/225186139-97b58564-c74b-433b-89b7-cb77997a78e7.gif)
+
+Generation 500  
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/57846202/225185780-1000afc3-3e13-48ac-a714-41e4d59c72bd.gif)
 
 
 

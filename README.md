@@ -15,8 +15,14 @@ python3 search.py
 This python script creates a parallel hill climber that evolves a robot that moves forward the fastest. After a series of evolutions, the results, including fitness curves, successful mutations, and best fitness of each parallel hill climber, are saved in the `results` directory.
 
 Currently, this script creates 10 parallel hill climbers with 10 random seeds. Each parallel hill climber has a population size of 10 and simulates each population over 500 generations. Thus, 500 * 10 * 10 = 50,000 simulations.  
-You can change the number of hill climbers being created in `search.py`.  
-You can edit the population size and number of generations in `constants.py`.  
+You can change the *number of hill climbers* being created in `search.py`.  
+You can edit the *population size* and *number of generations* in `constants.py`.  
+
+You can also choose to view the evolution process of any lineage.
+```
+python3 showLineage.py {seed_number} {population_number}
+```
+This will display 4 simulations corresponding to 4 different generations for that specific lineage. Feel free to look at the fitness_curve_per_population graph to choose which population to run.
 
 ## The World
 <img src="https://user-images.githubusercontent.com/57846202/225165716-6da3286e-5193-43b4-b67a-e6408ffa9182.jpg" width="350" height="280">  
@@ -147,7 +153,7 @@ Let's look deeper into the population with the highest fitness.
 ![Seed 8 Fitness Curve](https://github.com/siwoopark10/ludobots-public/blob/main/results/seed_8/fitness_curve_per_population_8.png)
 
 **Seed 8 Population 8**
-We can see that Population 1 of seed 8 had an impressive fitness of over 7.
+We can see that Population 1 of seed 8 had an impressive fitness of over 7.  
 Generation 1  
 ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/57846202/225186015-6d79af7c-0270-4c8e-bf2f-8de6c884db56.gif)
 

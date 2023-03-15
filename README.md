@@ -1,85 +1,104 @@
 # Ludobots
 ### Credits
-My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/)
+My work projects for the evolutionary robotics project - Ludobots, based completely in the subreddit [r/ludobots](https://www.reddit.com/r/ludobots/).  
+Final Project for CS 396/496 Aritificial Life.
 
 ## How to reproduce my results
+You can run 50,000 simulations by calling the python script below. 
 ```
 python3 search.py
 ```
-This python script creates a parallel hill climber that evolves a robot that moves forward the fastest. After a series of evolutions, it should display a simulation of the robot with the best performance.
+This python script creates a parallel hill climber that evolves a robot that moves forward the fastest. After a series of evolutions, the results, including fitness curves, successful mutations, and best fitness of each parallel hill climber, are saved in the `results` directory.
+
+Currently, this script creates 10 parallel hill climbers with 10 random seeds. Each parallel hill climber has a population size of 10 and simulates each population over 500 generations. Thus, 500 * 10 * 10 = 50,000 simulations.  
+You can change the number of hill climbers being created in `search.py`.  
+You can edit the population size and number of generations in `constants.py`.  
+
+## The World
+<img src="https://user-images.githubusercontent.com/57846202/225165716-6da3286e-5193-43b4-b67a-e6408ffa9182.jpg" width="350" height="280">  
+The arena/world is an open field that expands in the x, y, and z direction. Our robot is placed in the middle of the world.  
+
+
+A force of **gravity** pulls down every object to ground level. Our robot cannot go underground (z < 0).  
+
+There is **friction** between our robot and the ground, which allows our robot to move around the world.  
  
- ## Body and Brain Structure
- The torso extend in the y-direction, and each torso link has a random dimension [(0,1), (0,1), (0,0.3)]. The height was intentially set to a lower value to provide more balance to the creature. The number of links in the torso is randomly chosen between 3 and 8. For simiplicity sake, the sizes of every link will be [1,1,1] even though I limited the z-size of the torso to be 0.3 and that of the limbs to be 0.5.
+ ## The Body
  
-<img src="https://user-images.githubusercontent.com/57846202/221871750-2e387886-0d08-4ac6-8da5-c2dcba6fb66e.jpg" width="120" height="120">
+**Genotype: directed graph**  
 
+<img src="https://user-images.githubusercontent.com/57846202/225164698-658bf49e-4fd1-4139-af99-d7f754fbb68d.jpg" width="400" height="300">
 
-The main body of the robot is built through **Create_Body** and the neurons are set in **Create_Brain**.
-I created an helper function **Create_Limbs** to help me loop through to create the arms and legs.
-
-Each torso link has:
-- no limbs
-<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100">
-
+We first start with a torso link. This link is connected to another torso link, which starts off a body segment. A body segment consists of
+- a torso link
 - two arms
+- two legs
 
-<img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="120">
+The left and right side are symmetrical to each other. So if one side has an arm, the other side is guaranteed to have an arm of the same size.
+66.6 percent of the time a body segment will have two arms. Half of those body segments with arms will have two legs (33.3 percent).
+
+**Torso** links are connected along the y-axis, and each of them has a random dimension of range [(0,1), (0,1), (0,0.3)]. This would most likely create a flatter rectangle, preventing the body of our robot from being too fat vertically.
+
+Both **arms** and **legs** have a random of range [(0,1), (0,1), (0,0.5)]. The range of the z dimension is greater than that of a torso link in order to allow our robot to have longer limbs, which is what we usually observe in the natural world.
+
+**Phenotype: 3D model**  
 
 
-- or two arms and legs
+A phenotype of a body segment would look like this 3D model:  
+<img src="https://user-images.githubusercontent.com/57846202/225169438-4515add6-b9a5-4384-b601-318cb222df9a.jpg" width="350" height="300">  
+
+Each body segment looks like either one of these three 3D models:
+
+- no limbs
+
+<img src="https://user-images.githubusercontent.com/57846202/222006572-d1383b73-2d17-4bed-a20a-2919b30460ee.jpg" width="150" height="100">  
+
+- two arms  
+
+<img src="https://user-images.githubusercontent.com/57846202/222006598-41cce254-ad5f-4738-9d81-d444180a572a.jpg" height="100" width="120">  
+
+- or two arms and legs  
 
 <img src="https://user-images.githubusercontent.com/57846202/222006614-9c600284-d660-4c38-a0f8-e3282f237cf5.jpg" height="100" width="120">
 
 ### Links and Joints Positioning
 
-We initially start with an absolute positioning for a link and a joint. The joint is placed on the center of the surface facing the positive y-direction.
+A link is connected to another links through joints. Each torso link is connected in the y-direction with the joint being placed in the middle of the intersection of the two faces.
 
-<img src="https://user-images.githubusercontent.com/57846202/221871752-9a090dc3-1ef1-4df4-b7b0-961435029ed9.jpg" width="150" height="120">
+<img src="https://user-images.githubusercontent.com/57846202/221871750-2e387886-0d08-4ac6-8da5-c2dcba6fb66e.jpg" width="180" height="160">
 
-The next joint points to the center of the link's bottom right edge. This can be calculated by adding 1/2 of the link's y-size, subtracting 1/2 of z-size, and adding 1/2 of x-size. The center position of the next link (the arm) is going to be on the same z as the joint but to the right by 1/2 of its x-size.
+The links for the body segment (torso, arms, legs) are connected in a slightly more complex manner.
 
-<img src="https://user-images.githubusercontent.com/57846202/221871755-d47436d7-7b62-4e6f-bf5a-f7296d4a053a.jpg" width="150" height="120">
-<img src="https://user-images.githubusercontent.com/57846202/221871758-0727fe8d-80be-41f7-88a7-c8df092b6223.jpg" width="160" height="100">
+<img src="https://user-images.githubusercontent.com/57846202/225164699-caa43187-d24f-4893-b78a-bcf8555026c8.jpg" width="600" height="250">
 
-The next joint which is relative to the previous joint is located at the center of the bottom surface. The position of the next link (leg) is 1/2 of its z-size down, but the same x and y. Now we have created a connected arm and leg.
+One thing to note is that all joints rotate around the x axis in order to promote movement along the y-axis.
 
-<img src="https://user-images.githubusercontent.com/57846202/222007345-e31886f0-cc9a-4584-8fad-bb762c19cd50.jpg" width="150" height="140">
+## The Brain
 
+The Brain consists of:
+- Motor Neurons
+- Sensor Neurons
+- Synapses
 
-The left size is basically the same as the right size but the x-values are filpped.
+<img src="https://user-images.githubusercontent.com/57846202/225164695-257be63e-e99d-4e90-af9e-6a51fe5eebb0.jpg" width="350" height="250">
 
-<img src="https://user-images.githubusercontent.com/57846202/222007372-c08244d4-6723-414d-b9a5-47d11385f055.jpg" width="150" height="200">
+For every joint that exists in our robot, there is a **motor neuron** that facilitates the movement of those joints.  
+Each joint in the diagram above is assigned a motor neuron.
 
-One shoftcut I took was to keep the size of the arms and legs smaller than the torso link so that there aren't any unpleasing overlaps between the limbs. The joint axes were also determined carefully to allow forward and backward movement for the robot creature. (jointAxis = "1 0 0")
+**Sensor neurons** randomly placed in torso links and limb links. The probability that a torso link has a sensor is 50%, where as it is 70% for the arms and legs. The links with sensors are indicated with the color "Green" in the simulation, and the rest of them are "Cyan" (blue in the diagram above).
 
-### Initializing fields
+<img src="https://user-images.githubusercontent.com/57846202/225164697-265a5613-8788-4487-bf65-983d8eee2668.jpg" width="450" height="250">
 
-Before each simulation is run, I intitialize the necessary weights, such as synapse weights, random size of links, and the positioning of sensor links.
+**Synapses** determine the relationship between the motor neurons and the sensor neurons. Whenever a link with a sensor neuron senses a touch (in our simulation, contact with the ground), a message is sent to all the motor neurons. The **weight** of the synapse determine how much each motor neuron reacts to the message, which influences how much the joint rotates. The weights are randomly assigned at the beginning of the simulation.
 
-**Sensor Links**: Sensor links are represented with the color green. Each torso link has a 50 percent probability and each limb 70 percent probability of having a sensor. I created a list of booleans to indicate whether a specific link is a sensor.
-
-**Synapse Weights**: A synapse is send from a sensor link to every motor joint.
-
-Rows = Number of sensors
-
-Columns = Number of joints (every joint is a motor joint)
-
-Each synapse weight is randomly sampled between -1 and 1.
-
-**Link Sizes**: I randomly determined the number of torso links to be a number between 4 and 10. I can create a list of random sizes that correspond to each link size. Whenever I loop through each index of the torso, I randomly generate a number between 0 and 3.
-0 -> No limbs
-1 -> Two Arms
-2,3 -> Two Arms and Legs
-The left and right are symmetrical, so I generate one size for two limbs. I increaesed the probability of generating more limbs to give the robot more mobility. The sizes of the limbs are stored in a list of lists.
-
-### Sensors, Motors, and Synapses
-Based on the pre-set list of booleans that indicate whether a link has a sensor, send a sensor neuron with name incrementing from 0.
-
-Send motor neurons for every joint in our robot. Every torso link has a joint that connects each other. In addition, they have either 0, 2, or 4 extra joints depending on how many limbs each torso joint has. 
-
-After sending all the sensor neurons and the motor neurons, send synapse between every sensor and every joint. The weight of the synapse was predetermined in the initialization stage above.
+This diagram is a 3D model of how synapses work with motor neuron and sensor neurons.
 
 <img src='https://user-images.githubusercontent.com/57846202/222050989-49951c4a-82ff-4013-b4a5-7b8f50aed337.jpg' width="200" height="160">
+
+## Code
+
+All of the code for a single run of simulation is done in `solutions.py`. The world is created by `Create_World`. The main body of the robot is built through `Create_Body` and the neurons are set in `Create_Brain`. I created an helper function `_Create_Limbs` to help me loop through to create the arms and legs. `Initialize_fields` initializes the sizes of all the torso and limb links as well as the weights of each synapse.
+
 
 ## Evolution
 The creature evolves through mutations which can be divided into 4 main types (2 body and 2 brain): Generating or deleting limbs, changing the size of the links, changing synapse weight, and changing sensor placement.
@@ -112,15 +131,23 @@ Since we know the dimentions of `self.weights`, we can replace one of the values
 
 We have a list of boolean values, `self.linkLimbsWithSensors` and `self.linksWithSensors` indicating which links are sensors and which are not. Pick a random value inside these lists and randomly pick True or False with a probability of 70 percent for True to promote mobility. 
 
-In each evolution, any of these 4 mutations could happen. 
-
-
-### Parallel Hill Climber
-Parallel Hill Climber allows us to simulatenously train and evolve different robots so that I can start off on various starting points. Each robot in the population evolves over several generations. The population size and the number of generations can be modified in the `constants.py` file. The main functionality of this method is to create a child robot from a copy of a parent robot, and to generate mutations in the child robot to see if it outperforms the parent. If the child robot performs better, we overwrite the parent robot with the child and continue to evolve and mutate until we reach the maximum number of generations.
+In each evolution, one of these 7 mutations happen. 
 
 ### Fitness function
+The robot in this assignment is trying to optimize for how far it can crawl in the *positive y-direction*. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
+
+### Parallel Hill Climber
+Parallel Hill Climber allows us to simulatenously train and evolve different robots so that I can start off on various starting points. Each robot in the population evolves over several generations. The population size and the number of generations can be modified in the `constants.py` file. The main functionality of this method is to create a **child** robot from a copy of a **parent** robot, and to generate *mutations* in the child robot to see if it outperforms the parent. If the child robot performs better (*better fitness*), we overwrite the parent robot with the child and continue to evolve and mutate until we reach the maximum number of generations. Thus, the fitness of each robot should monotonously increase over time.
+
+
+
+## Results
+
+The results of the simulations are all stored in the `results` directory. 
+
 The robot in this assignment is trying to optimize for how far it can crawl in the positive y-direction. Thus, the fitness function prefers creatures that end up with the greatest y-position by the time the simulation terminates.
 
+/Users/siwoopark/Documents/Artificial Life/ludobots-public/results/phc_fitness_curve.png
 ### Fitness Curves
 The fitness improvement for population size = 5 and number of generations = 25 with 5 random seeds. A larger set of values could produce a smoother curve.
 
@@ -128,4 +155,3 @@ The fitness improvement for population size = 5 and number of generations = 25 w
 
 ### Video Demonstrating Evolution
 https://youtu.be/8KHb1xFTw8U
-

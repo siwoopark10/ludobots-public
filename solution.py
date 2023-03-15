@@ -11,8 +11,7 @@ class SOLUTION:
         # self.weights = np.random.rand(
         #     c.numSensorNeurons, c.numMotorNeurons) * 2 - 1
         self.myID = myID
-        self.randomLinkNum = random.randint(3, 6)
-        self.randomLinkLimbNum = 0
+        self.randomLinkNum = random.randint(2, 4)
         self.linkRandomSizes = []
         self.linkLimbsRandomSizes = []
         self.armIndex = 0
@@ -21,8 +20,6 @@ class SOLUTION:
         self.limbSensors = []
         self.linkLimbsWithSensors = []
         self.linksWithSensors = np.random.randint(2, size=self.randomLinkNum)
-
-        self.Initialize_Weights()
 
     def Set_ID(self, id):
         self.myID = id
@@ -36,15 +33,13 @@ class SOLUTION:
 
             linkSize = self._Generate_Random_Sizes(1, 1, 0.3)
             self.linkRandomSizes.append(linkSize)
-            randomLimbNum = random.randint(0, 3) * 2
+            randomLimbNum = random.randint(0, 2) * 2
             if randomLimbNum == 2:
                 self.linkLimbsRandomSizes.append(
                     self._Generate_Random_Sizes(linkSize[0], linkSize[1], 0.5, 1))
-                self.randomLinkLimbNum += 2
             elif randomLimbNum > 2:
                 self.linkLimbsRandomSizes.append(
                     self._Generate_Random_Sizes(linkSize[0], linkSize[1], 0.5, 2))
-                self.randomLinkLimbNum += 4
             else:
                 self.linkLimbsRandomSizes.append([])
 
@@ -55,7 +50,8 @@ class SOLUTION:
         # Synapse Weights
         sensorCount = np.count_nonzero(
             self.linksWithSensors) + sum(element == 1 for row in self.linkLimbsWithSensors for element in row)
-        jointCount = self.randomLinkNum + self.randomLinkLimbNum - 1
+        jointCount = self.randomLinkNum + \
+            sum(len(row)*2 for row in self.linkLimbsRandomSizes) - 1
         self.weights = np.array(
             [[random.random() * 2-1 for j in range(jointCount)] for i in range(sensorCount)])
 
@@ -79,68 +75,100 @@ class SOLUTION:
         print(f"fitness of solution {self.myID}: {self.fitness}")
 
     def Mutate(self):
-        # choose_mutation = random.randint(0, 3)
-        # if choose_mutation == 0:
-        # Change synapse weight
-        row, col = tuple(np.random.randint(0, size)
-                         for size in self.weights.shape)
-        print(f'synapse weights from {self.weights[row][col]}')
-        self.weights[row][col] = random.random() * 2 - 1
-        print(f'to {self.weights[row][col]}')
+        choose_mutation = random.randint(0, 7)
+        self.selected_mutation = choose_mutation
+        if choose_mutation == 0:
+            print('synapse weight')
+            try:
+                # Change synapse weight
+                row, col = tuple(np.random.randint(0, size)
+                                 for size in self.weights.shape)
+                # print(f'synapse weights from {self.weights[row][col]}')
+                self.weights[row][col] = random.random() * 2 - 1
+            except:
+                print(self.linkRandomSizes)
+                print(self.linkLimbsRandomSizes)
+                print(self.randomLinkNum)
+                print(self.linksWithSensors)
+        # print(f'to {self.weights[row][col]}')
 
-        # if choose_mutation == 1:
-        # Change Sensor Placement
-        print("change sensor placement")
-        i = random.randint(0, len(self.linksWithSensors)-1)
-        self.linksWithSensors[i] = random.randint(0, 1)
-        row = random.randint(0, len(self.linkLimbsWithSensors)-1)
-        print(f'{self.linkLimbsWithSensors[row]}')
-        if self.linkLimbsWithSensors[row]:
-            print('changed')
-            col = random.randint(0, len(self.linkLimbsWithSensors[row])-1)
-            self.linkLimbsWithSensors[row][col] = random.choices(
-                [True, False], [0.6, 0.4])[0]
-            print(f'{self.linkLimbsWithSensors[row]}')
+        if choose_mutation == 1:
+            # change link size
+            print('change link size')
+            i = random.randint(0, len(self.linkLimbsRandomSizes)-1)
+            self.linkRandomSizes[i] = self._Generate_Random_Sizes(1, 1, 0.3)
+        if choose_mutation == 2:
+            print('change limb size')
+            i = random.randint(0, len(self.linkLimbsRandomSizes)-1)
+            # print(f'from limb {self.linkLimbsRandomSizes[i]}')
+            linkSize = self.linkRandomSizes[i]
+            for j in range(len(self.linkLimbsRandomSizes[i])):
+                self.linkLimbsRandomSizes[i][j] = self._Generate_Random_Sizes(
+                    linkSize[0], linkSize[1], 0.5)
+            # print(f'to limb {self.linkLimbsRandomSizes[i]}')
+
+        if choose_mutation == 3:
+            # Change Sensor Placement
+            print("change link sensor placement")
+            i = random.randint(0, len(self.linksWithSensors)-1)
+
+            self.linksWithSensors[i] = random.choices(
+                [True, False], [0.7, 0.3])[0]
+            self.Calculate_Synapse_Weights()
+        if choose_mutation == 4:
+            print('changing limb sensor')
+            row = random.randint(0, len(self.linkLimbsWithSensors)-1)
+            if self.linkLimbsWithSensors[row]:
+                col = random.randint(0, len(self.linkLimbsWithSensors[row])-1)
+                self.linkLimbsWithSensors[row][col] = random.choices(
+                    [True, False], [0.7, 0.3])[0]
             self.Calculate_Synapse_Weights()
 
-        # if choose_mutation == 2:
-        # Generate more or fewer limbs
-        print('generate limbs')
-        i = random.randint(0, len(self.linkLimbsRandomSizes)-1)
-        self.randomLinkLimbNum -= len(self.linkLimbsRandomSizes[i])
-        print(f'from limb {self.linkLimbsRandomSizes[i]}')
-        linkSize = self.linkRandomSizes[i+1]
-        randomLimbNum = random.randint(0, 3) * 2
-        if randomLimbNum == 2:
-            self.linkLimbsRandomSizes[i] = self._Generate_Random_Sizes(
-                linkSize[0], linkSize[1], 0.5, 1)
-            self.randomLinkLimbNum += 2
-        elif randomLimbNum > 2:
-            self.linkLimbsRandomSizes[i] = self._Generate_Random_Sizes(
-                linkSize[0], linkSize[1], 0.5, 2)
-            self.randomLinkLimbNum += 4
-        else:
-            self.linkLimbsRandomSizes[i] = []
-        self.linkLimbsWithSensors[i] = [
-            random.random() < 0.75 for i in range(randomLimbNum)]
-        print(f'to {self.linkLimbsRandomSizes[i]}')
-        self.Calculate_Synapse_Weights()
+        if choose_mutation == 5 and self.randomLinkNum < 6:
+            # add link
+            print('add link')
+            self.randomLinkNum += 1
+            self.linkRandomSizes.append(self._Generate_Random_Sizes(1, 1, 0.3))
+            self.linksWithSensors = np.append(
+                self.linksWithSensors, random.randint(0, 1))
+            self.linkLimbsRandomSizes.append([])
+            self.linkLimbsWithSensors.append([])
+            self.Calculate_Synapse_Weights()
+        if choose_mutation == 6 and self.randomLinkNum > 2:
+            print('remove link')
+            self.randomLinkNum -= 1
+            self.linkRandomSizes = self.linkRandomSizes[:-1]
+            self.linkLimbsRandomSizes = self.linkLimbsRandomSizes[:-1]
+            self.linksWithSensors = self.linksWithSensors[:-1]
+            self.linkLimbsWithSensors = self.linkLimbsWithSensors[:-1]
+            self.Calculate_Synapse_Weights()
 
-        # if choose_mutation == 3:
-        # change link size
-        print('change link size')
-        i = random.randint(0, len(self.linkLimbsRandomSizes)-1)
-        print(f'from limb {self.linkLimbsRandomSizes[i]}')
-        linkSize = self.linkRandomSizes[i+1]
-        for j in range(len(self.linkLimbsRandomSizes[i])):
-            self.linkLimbsRandomSizes[i][j] = self._Generate_Random_Sizes(
-                linkSize[0], linkSize[1], 0.5)
-        print(f'to limb {self.linkLimbsRandomSizes[i]}')
+        if choose_mutation == 7:
+            # Generate more or fewer limbs
+            print('generate limbs')
+            i = random.randint(0, len(self.linkLimbsRandomSizes)-1)
+            # print(f'from limb {self.linkLimbsRandomSizes[i]}')
+            linkSize = self.linkRandomSizes[i-1]
+            randomLimbNum = random.randint(0, 2) * 2
+            if randomLimbNum == 2:
+                self.linkLimbsRandomSizes[i] = self._Generate_Random_Sizes(
+                    linkSize[0], linkSize[1], 0.5, 1)
+            elif randomLimbNum > 2:
+                self.linkLimbsRandomSizes[i] = self._Generate_Random_Sizes(
+                    linkSize[0], linkSize[1], 0.5, 2)
+            else:
+                self.linkLimbsRandomSizes[i] = []
+            self.linkLimbsWithSensors[i] = [
+                random.random() < 0.75 for i in range(randomLimbNum)]
+            # print(f'to {self.linkLimbsRandomSizes[i]}')
+            self.Calculate_Synapse_Weights()
 
     def Calculate_Synapse_Weights(self):
         sensorCount = np.count_nonzero(
             self.linksWithSensors) + sum(element == 1 for row in self.linkLimbsWithSensors for element in row)
-        jointCount = self.randomLinkNum + self.randomLinkLimbNum - 1
+        jointCount = self.randomLinkNum + \
+            sum(len(row)*2 for row in self.linkLimbsRandomSizes) - 1
+        print()
         self.weights = np.array(
             [[random.random() * 2-1 for j in range(jointCount)] for i in range(sensorCount)])
 
@@ -155,7 +183,7 @@ class SOLUTION:
         randomSize = self.linkRandomSizes[0]
         pyrosim.Send_Cube(name="Link0", pos=[
                           0, 0, initialHeight], size=randomSize, color="Green" if self.linksWithSensors[0] == 1 else "Cyan")
-
+        
         for i in range(1, self.randomLinkNum):
             randomSize = self.linkRandomSizes[i-1]
             if i == 1:
@@ -203,9 +231,9 @@ class SOLUTION:
         self.sensorCount = sensorCount
 
         # Synapses
-        print('compre')
-        print(sensorCount, self.randomLinkNum-1 + len(self.limbJoints))
-        print(self.weights.shape)
+        # print('compre')
+        # print(sensorCount, self.randomLinkNum-1 + len(self.limbJoints))
+        # print(self.weights.shape)
         for i in range(sensorCount):
             for j in range(self.randomLinkNum-1 + len(self.limbJoints)):
                 pyrosim.Send_Synapse(

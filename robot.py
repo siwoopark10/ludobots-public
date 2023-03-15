@@ -51,10 +51,11 @@ class ROBOT:
             self.robotId)
         # positionOfLinkZero = stateOfLinkZero[0]
         basePosition = basePositionAndOrientation[0]
+        print('position', basePosition)
         # xCoordinateOfLinkZero = positionOfLinkZero[0]
-        xCoordinateOfLinkZero = basePosition[1]
+        yCoordinateOfLinkZero = basePosition[1]
         f = open(f"tmp{self.id}.txt", "w")
-        f.write(str(xCoordinateOfLinkZero))
+        f.write(str(yCoordinateOfLinkZero))
         f.close()
         os.system(f"mv tmp{self.id}.txt fitness{self.id}.txt")
 
